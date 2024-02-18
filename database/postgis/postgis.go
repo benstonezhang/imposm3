@@ -403,7 +403,10 @@ func clusterTable(pg *PostGIS, tableName string, srid int, columns []ColumnSpec)
 			_, err := pg.Db.Exec(sql)
 			step()
 			if err != nil {
-				return errors.Wrapf(err, "indexing %q on geohash", tableName)
+				if ! strings.Contains(err.Error(), "already exists") {
+					return errors.Wrapf(err, "indexing %q on geohash", tableName)
+				}
+				log.Printf("[step] Skipped: %q on geohash is indexed", tableName)
 			}
 
 			step = log.Step(fmt.Sprintf("Clustering %q on geohash", tableName))
