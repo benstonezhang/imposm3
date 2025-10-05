@@ -137,7 +137,6 @@ func Import(importOpts config.Import) {
 	}
 
 	if importOpts.Write {
-		importFinished := log.Step("Importing OSM data")
 		writeFinished := log.Step("Writing OSM data")
 		progress := stats.NewStatsReporterWithEstimate(elementCounts)
 
@@ -232,6 +231,10 @@ func Import(importOpts config.Import) {
 		}
 
 		writeFinished()
+	}
+
+	if importOpts.Generate {
+		importFinished := log.Step("Importing OSM data")
 
 		if db, ok := db.(database.Generalizer); ok {
 			if err := db.Generalize(); err != nil {

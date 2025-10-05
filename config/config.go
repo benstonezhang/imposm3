@@ -170,6 +170,7 @@ type Import struct {
 	Appendcache      bool
 	Read             string
 	Write            bool
+	Generate         bool
 	Optimize         bool
 	Diff             bool
 	DeployProduction bool
@@ -212,6 +213,7 @@ func ParseImport(args []string) Import {
 	flags.BoolVar(&opts.Appendcache, "appendcache", false, "append cache")
 	flags.StringVar(&opts.Read, "read", "", "read")
 	flags.BoolVar(&opts.Write, "write", false, "write")
+	flags.BoolVar(&opts.Generate, "generate", false, "generate")
 	flags.BoolVar(&opts.Optimize, "optimize", false, "optimize")
 	flags.BoolVar(&opts.Diff, "diff", false, "enable diff support")
 	flags.BoolVar(&opts.DeployProduction, "deployproduction", false, "deploy production")
